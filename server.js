@@ -6,9 +6,9 @@ var bodyParser = require('body-parser');
 // Sets up the Express App
 // =============================================================
 var app = express();
-// var PORT = 3000;
+var PORT = 3000;
 
-app.set('port', (process.env.PORT || 3000));
+// app.set('port', (process.env.PORT || 3000));
 
 // Sets up the Express app to handle data parsing
 app.use(bodyParser.json());
@@ -29,6 +29,10 @@ require('./app/routing/htmlRoutes.js')(app);
 // api routes
 require('./app/routing/apiRoutes.js')(app);
 
-app.listen(app.get('port'), function(){
-  console.log("listening on port " + app.get('port'))
+// app.listen(app.get('port'), function(){
+//   console.log("listening on port " + app.get('port'))
+// });
+
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
 });
